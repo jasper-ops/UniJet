@@ -1,0 +1,49 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "jsx": "preserve",
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "useDefineForClassFields": true,
+        "baseUrl": ".",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "types": [
+            "@dcloudio/types",
+            "@uni-helper/uni-app-types",
+            "./types",
+            "wot-design-uni/global.d.ts"
+        ],
+        "strict": true,
+        "noImplicitThis": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": false,
+        "skipLibCheck": true
+    },
+    "vueCompilerOptions": {
+        "plugins": ["@uni-helper/uni-app-types/volar-plugin"],
+        "nativeTags": [
+            "block",
+            "component",
+            "template",
+            "slot"
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue"
+    ]
+}

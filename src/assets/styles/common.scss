@@ -1,0 +1,82 @@
+// #region flex tools
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-col {
+    @include flex-center;
+    flex-direction: column;
+}
+
+.center-row {
+    @include flex-center;
+    flex-direction: row;
+}
+
+// #endregion flex-center
+
+// #region position tools
+
+.position-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.position-left-center {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.position-right-center {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.position-top-center {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.position-bottom-center {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.position-left-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.position-right-top {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.position-left-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.position-right-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+// #endregion position tools
+

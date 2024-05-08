@@ -1,0 +1,18 @@
+html,
+body,
+page {
+    height: 100%;
+}
+
+html {
+    background-color: $uni-bg-color-grey;
+}
+
+html body {
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid red;
+    max-width: 430px;
+    transform: translate(0, 0); // fixed定位也得基于body
+    margin: 0 auto;
+}
