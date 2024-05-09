@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PageRoot from '@/components/page-root/page-root.vue';
-import { goWhere } from '@/utils/pages';
+import { goWhere } from '@/utils/RouteUtils';
 
 const isH5 = __UNI_PLATFORM__ === 'h5';
 console.log('🚀 ~ isH5:', isH5);
@@ -16,7 +16,7 @@ console.log('🚀 ~ name:', name);
 </script>
 
 <template>
-    <PageRoot :title="$t('home')">
+    <PageRoot>
         <view class="center-row">
             <button>{{ $t('submit') }}</button>
             <button @tap="() => goWhere('/pages/auth/login/index')">

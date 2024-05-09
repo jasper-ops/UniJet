@@ -1,14 +1,24 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import MainTabBar from '../main-tab-bar/main-tab-bar.vue';
 import NavButtons from '../nav-buttons/nav-buttons.vue';
-import { currentIsTabBar } from '@/utils/pages';
+import { currentIsTabBar, getCurrentPageConfig } from '@/utils/RouteUtils';
+import pagesConfig from '@/pages';
 
 const props = withDefaults(defineProps<{
     title?: string
     showTabBar?: boolean
 }>(), {
-    title: 'UniJet',
     showTabBar: true,
+});
+
+const $title = computed(() => {
+    if (props.title)
+        return props.title;
+
+    const config = getCurrentPageConfig();
+
+    return config?.style?.navigationBarTitleText ?? pagesConfig.globalStyle.navigationBarTitleText ?? '';
 });
 
 const $showTabBar = props.showTabBar && currentIsTabBar();
@@ -30,7 +40,7 @@ export default {
                 :fixed="true"
                 :placeholder="true"
                 :safe-area-inset-top="true"
-                :title="title"
+                :title="$t($title)"
             >
                 <template #left>
                     <NavButtons />

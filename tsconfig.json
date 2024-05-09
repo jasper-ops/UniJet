@@ -20,7 +20,8 @@
             "@dcloudio/types",
             "@uni-helper/uni-app-types",
             "./types",
-            "wot-design-uni/global.d.ts"
+            "wot-design-uni/global.d.ts",
+            "./uni-pages.d.ts"
         ],
         "strict": true,
         "noImplicitThis": true,

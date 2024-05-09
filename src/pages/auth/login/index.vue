@@ -3,7 +3,7 @@ import PageRoot from '@/components/page-root/page-root.vue';
 </script>
 
 <template>
-    <PageRoot :title="$t('login')">
+    <PageRoot>
         1
     </PageRoot>
 </template>

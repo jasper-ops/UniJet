@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import pagesConfig from '@/pages.json';
-import { goWhere } from '@/utils/pages';
+import pagesConfig from '@/pages';
+import { goWhere } from '@/utils/RouteUtils';
 
-const tabbar = [
-    { text: 'home', icon: 'home' },
-    { text: 'order', icon: 'list' },
-];
-
+const { tabBar } = pagesConfig;
 const pages = getCurrentPages();
-const current = pagesConfig.tabBar.list.findIndex(item => item.pagePath === pages[0].route);
+const current = tabBar.list.findIndex(item => item.pagePath === pages[0].route);
 
 function handleChange({ value }: { value: number }) {
-    goWhere(`/${pagesConfig.tabBar.list[value].pagePath}`);
+    if (value !== current)
+        goWhere(`/${pagesConfig.tabBar.list[value].pagePath}`);
 }
 </script>
 
@@ -26,6 +23,8 @@ export default {
 
 <template>
     <WdTabbar
+        :inactive-color="tabBar.color"
+        :active-color="tabBar.selectedColor"
         :model-value="current"
         :fixed="true"
         :placeholder="true"
@@ -33,7 +32,7 @@ export default {
         @change="handleChange"
     >
         <WdTabbarItem
-            v-for="item in tabbar"
+            v-for="item in tabBar.list"
             :key="item.text"
             :title="$t(item.text)"
             :icon="item.icon"

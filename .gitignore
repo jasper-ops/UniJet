@@ -20,3 +20,6 @@ dist
 *.sln
 *.sw?
 components.d.ts
+
+src/pages.json
+uni-pages.d.ts

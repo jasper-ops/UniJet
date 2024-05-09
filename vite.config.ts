@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import Components from '@uni-helper/vite-plugin-uni-components';
 import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers';
 import Uni from '@dcloudio/vite-plugin-uni';
+import UniPages from '@uni-helper/vite-plugin-uni-pages';
 
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
@@ -74,6 +75,9 @@ export default defineConfig(async ({ mode }) => {
         },
         base: './',
         plugins: [
+            UniPages({
+                mergePages: false,
+            }),
             Components({
                 resolvers: [WotResolver()],
             }),
@@ -96,6 +100,26 @@ export default defineConfig(async ({ mode }) => {
                 generateScopedName: '[local]-[hash:base64:8]',
                 scopeBehaviour: 'global',
             },
+        },
+        build: {
+            // rollupOptions: {
+            //     external: ['side-channel'],
+            // },
+            target: 'es2015',
+            minify: 'terser',
+            // terserOptions: {
+            //     compress: {
+            //         drop_console: env.VITE_DELETE_CONSOLE === 'true',
+            //         drop_debugger: env.VITE_DELETE_CONSOLE === 'true',
+            //     },
+            // },
+            // 解决windows系统对微信小程序自动关闭服务的问题
+            // watch:
+            //     process.platform === 'win32' // 检测是否为 windows 系统
+            //         ? {
+            //                 exclude: ['node_modules/**', '/__uno.css'],
+            //             }
+            //         : null,
         },
     } as UserConfig;
 });

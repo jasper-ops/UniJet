@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SwitchLanguage from '../switch-language/switch-language.vue';
-import { currentIsHome, goBack, goHome } from '@/utils/pages';
+import { currentIsHome, goBack, goHome } from '@/utils/RouteUtils';
 
 let showCount = 0;
 
@@ -45,7 +45,7 @@ export default {
             v-if="showHome"
             class="item center-col"
             hover-class="nav-buttons--hover"
-            @tap="goHome"
+            @tap="() => goHome()"
         >
             <text class="i-carbon:home" />
         </view>
