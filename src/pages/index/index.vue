@@ -13,13 +13,25 @@ console.log('🚀 ~ isProd:', isProd);
 
 const name = import.meta.env.VITE_NAME;
 console.log('🚀 ~ name:', name);
+
+function goLogin() {
+    goWhere('/pages/auth/login/index?name=test', {
+        params: {
+            username: 'wdfrgggggg',
+            password: 'asdasdasd',
+        },
+        data: {
+            a: 1,
+        },
+    });
+}
 </script>
 
 <template>
     <PageRoot>
         <view class="center-row">
             <button>{{ $t('submit') }}</button>
-            <button @tap="() => goWhere('/pages/auth/login/index')">
+            <button @tap="goLogin">
                 {{ $t('login') }}
             </button>
         </view>

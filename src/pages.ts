@@ -39,8 +39,7 @@ const pagesConfig = {
 
 export const pagesRoutes = pagesConfig.pages.map(item => `/${item.path}` as const);
 
-export const homeRoute = pagesConfig.pages[0].path;
-export const homePath = `/${homeRoute}` as const;
+export const homePath = `/${pagesConfig.pages[0].path}` as const;
 
 export type AllRoutes = typeof pagesRoutes[number];
 
