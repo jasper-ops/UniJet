@@ -1,5 +1,5 @@
 import { last } from 'lodash-es';
-import fastQueyString from 'fast-querystring';
+import qs from 'fast-querystring';
 import { onUnload } from '@dcloudio/uni-app';
 import type { AllRoutes } from '@/pages';
 import pagesConfig, { homePath } from '@/pages';
@@ -21,7 +21,7 @@ export interface RouteOptions {
     redirectIfPossible?: boolean;
 }
 
-const routeDataMap = new Map<string, Record<string, any>>();
+const routeDataMap = new Map<string, any>();
 const tabBarSet = new Set<string>(pagesConfig.tabBar.list.map(item => item.pagePath));
 
 export function getCurrentRoute() {
@@ -60,7 +60,7 @@ export function goWhere(url: string, options: RouteOptions = {}) {
         throw new Error('Only accept the absolute path');
 
     const {
-        data = {},
+        data,
         params = {},
         redirectIfPossible = false,
     } = options;
@@ -68,7 +68,7 @@ export function goWhere(url: string, options: RouteOptions = {}) {
     const separatorIndex = url.indexOf('?');
 
     if (separatorIndex > 0) {
-        const parsedParams = fastQueyString.parse(url.slice(separatorIndex + 1));
+        const parsedParams = qs.parse(url.slice(separatorIndex + 1));
         Object.assign(params, parsedParams);
 
         url = url.slice(0, separatorIndex);
@@ -79,7 +79,7 @@ export function goWhere(url: string, options: RouteOptions = {}) {
     routeDataMap.set(targetRoute, data); // 存储路由数据
     const isTabBar = tabBarSet.has(targetRoute);
 
-    url = `${url}?${fastQueyString.stringify(params)}`;
+    url = `${url}?${qs.stringify(params)}`;
 
     if (isTabBar)
         uni.switchTab({ url });
@@ -94,7 +94,11 @@ export function goHome(params: Record<string, any> = {}) {
 }
 
 export function goBack(delta = 1) {
-    uni.navigateBack({ delta });
+    const currentPages = getCurrentPages();
+    if (currentPages.length - 1 < delta)
+        uni.reLaunch({ url: homePath });
+    else
+        uni.navigateBack({ delta });
 }
 
 export function useRouteData() {

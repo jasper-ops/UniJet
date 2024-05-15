@@ -1,18 +1,15 @@
-html,
-body,
-page {
-    height: 100%;
-}
+// page,
+// uni-page-body {
+//     height: 100%;
+// }
 
 html {
     background-color: $uni-bg-color-grey;
 }
 
-html body {
-    box-sizing: border-box;
-    background-color: white;
-    border: 1px solid red;
-    max-width: 430px;
-    transform: translate(0, 0); // fixed定位也得基于body
+html {
+    // max-width: 430px;
     margin: 0 auto;
+    transform: translate(0, 0); // fixed定位也得基于body
+    // overflow: scroll;
 }

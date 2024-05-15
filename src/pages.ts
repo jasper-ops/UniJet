@@ -9,13 +9,19 @@ const pagesConfig = {
         {
             path: 'pages/order/list',
             style: {
-                navigationBarTitleText: 'home',
+                navigationBarTitleText: 'order',
             },
         },
         {
             path: 'pages/auth/login/index',
             style: {
-                navigationBarTitleText: 'home',
+                navigationBarTitleText: 'login',
+            },
+        },
+        {
+            path: 'pages/auth/index',
+            style: {
+                navigationBarTitleText: 'auth',
             },
         },
     ],

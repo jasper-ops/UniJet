@@ -1,8 +1,9 @@
 import { createSSRApp } from 'vue';
-import App from './App.vue';
+import { VueQueryPlugin } from '@tanstack/vue-query';
+import App from '@/App.vue';
 import 'virtual:uno.css';
+import pinia from '@/store';
 import i18n from '@/i18n';
-
 // import 'virtual:uno.css';
 
 export function createApp() {
@@ -10,6 +11,8 @@ export function createApp() {
         const app = createSSRApp(App);
 
         app.use(i18n);
+        app.use(pinia);
+        app.use(VueQueryPlugin);
         // 配置组件公共属性
         // Object.assign(app.config.globalProperties, {});
 

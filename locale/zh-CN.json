@@ -32,5 +32,7 @@
   "submit": "提交",
   "home": "首页",
   "order": "订单",
-  "login": "登录"
+  "login": "登录",
+  "modal.title": "模态框",
+  "modal.content": "这是一个模态框"
 }

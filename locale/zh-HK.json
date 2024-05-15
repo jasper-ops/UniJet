@@ -32,5 +32,7 @@
   "submit": "提交",
   "home": "首頁",
   "order": "訂單",
-  "login": "登入"
+  "login": "登入",
+  "modal.title": "模態框",
+  "modal.content": "這是一個模態框"
 }

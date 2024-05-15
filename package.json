@@ -2,7 +2,6 @@
     "name": "UniJet",
     "type": "commonjs",
     "version": "0.0.0",
-    "packageManager": "pnpm@8.15.1+sha256.245fe901f8e7fa8782d7f17d32b6a83995e2ae03984cb5b62b8949bfdc27c7b5",
     "scripts": {
         "jet": "pnpm i && pnpm wot",
         "dev:app": "uni -p app",
@@ -59,11 +58,14 @@
         "@dcloudio/uni-mp-weixin": "3.0.0-alpha-4010520240507001",
         "@dcloudio/uni-mp-xhs": "3.0.0-alpha-4010520240507001",
         "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-4010520240507001",
+        "@tanstack/vue-query": "^5.36.0",
         "@types/lodash-es": "^4.17.12",
         "@uni-helper/axios-adapter": "^1.5.2",
         "axios": "^1.6.8",
         "fast-querystring": "^1.1.2",
         "lodash-es": "^4.17.21",
+        "pinia": "^2.1.7",
+        "pinia-plugin-persistedstate": "^3.2.1",
         "vue": "^3.4.26",
         "vue-i18n": "^9.8.0",
         "wot-design-uni": "^1.2.6"

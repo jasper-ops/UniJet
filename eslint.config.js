@@ -1,4 +1,3 @@
-/* eslint-disable import/no-commonjs */
 const antfu = require('@antfu/eslint-config').default;
 
 const config = antfu({
@@ -18,6 +17,7 @@ const config = antfu({
         'unused-imports/no-unused-vars': 'warn',
 
         'ts/no-this-alias': 'off',
+        'ts/no-namespace': 'off',
 
         'import/no-commonjs': 'off',
         'import/no-unused-modules': 'error',

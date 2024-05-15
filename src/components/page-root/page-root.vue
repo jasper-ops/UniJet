@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { ScrollViewOnScroll } from '@uni-helper/uni-app-types/index';
 import MainTabBar from '../main-tab-bar/main-tab-bar.vue';
 import NavButtons from '../nav-buttons/nav-buttons.vue';
 import { currentIsTabBar, getCurrentPageConfig } from '@/utils/RouteUtils';
 import pagesConfig from '@/pages';
 
 const props = withDefaults(defineProps<{
-    title?: string
-    showTabBar?: boolean
+    title?: string;
+    showTabBar?: boolean;
+    onPageScroll?: ScrollViewOnScroll;
 }>(), {
     showTabBar: true,
 });
+
+const $showTabBar = props.showTabBar && currentIsTabBar();
 
 const $title = computed(() => {
     if (props.title)
@@ -21,7 +25,11 @@ const $title = computed(() => {
     return config?.style?.navigationBarTitleText ?? pagesConfig.globalStyle.navigationBarTitleText ?? '';
 });
 
-const $showTabBar = props.showTabBar && currentIsTabBar();
+if ($showTabBar) {
+    uni.hideTabBar({
+        animation: false,
+    });
+}
 </script>
 
 <script lang="ts">
@@ -57,5 +65,6 @@ export default {
 .App {
     --wot-navbar-title-font-weight: 400;
     --wot-navbar-title-font-size: 16px;
+
 }
 </style>

@@ -101,25 +101,19 @@ export default defineConfig(async ({ mode }) => {
                 scopeBehaviour: 'global',
             },
         },
-        build: {
-            // rollupOptions: {
-            //     external: ['side-channel'],
-            // },
-            target: 'es2015',
-            minify: 'terser',
-            // terserOptions: {
-            //     compress: {
-            //         drop_console: env.VITE_DELETE_CONSOLE === 'true',
-            //         drop_debugger: env.VITE_DELETE_CONSOLE === 'true',
-            //     },
-            // },
-            // 解决windows系统对微信小程序自动关闭服务的问题
-            // watch:
-            //     process.platform === 'win32' // 检测是否为 windows 系统
-            //         ? {
-            //                 exclude: ['node_modules/**', '/__uno.css'],
-            //             }
-            //         : null,
+        server: {
+            host: '0.0.0.0',
+            proxy: {
+                '^/api': {
+                    target:'https://imas-sg-qa.plaza-network.com',
+                    changeOrigin: true,
+                    rewrite: (path)=> path.replace(/^\/api/, ''),
+                }
+            }
         },
+        // build: {
+        //     target: 'es2015',
+        //     minify: 'terser',
+        // },
     } as UserConfig;
 });
