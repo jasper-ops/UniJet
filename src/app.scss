@@ -8,8 +8,8 @@ html {
 }
 
 html {
-    // max-width: 430px;
+    max-width: 430px;
     margin: 0 auto;
-    transform: translate(0, 0); // fixed定位也得基于body
+    // transform: translate(0, 0); // fixed定位也得基于body
     // overflow: scroll;
 }

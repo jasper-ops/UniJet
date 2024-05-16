@@ -40,7 +40,7 @@ console.log(i18n.global.locale);
 export function setLocale(lang: string) {
     uni.setLocale(lang);
     uni.setStorageSync(LANGUAGE_KEY, lang);
-    i18n.global.locale.value = lang;
+    i18n.global.locale = lang;
 }
 
 export function getLocale() {

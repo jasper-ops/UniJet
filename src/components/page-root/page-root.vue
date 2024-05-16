@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<{
     showTabBar: true,
 });
 
-const $showTabBar = props.showTabBar && currentIsTabBar();
+const isTabBar = currentIsTabBar();
+const $showTabBar = props.showTabBar && isTabBar;
 
 const $title = computed(() => {
     if (props.title)
@@ -25,7 +26,7 @@ const $title = computed(() => {
     return config?.style?.navigationBarTitleText ?? pagesConfig.globalStyle.navigationBarTitleText ?? '';
 });
 
-if ($showTabBar) {
+if (isTabBar) {
     uni.hideTabBar({
         animation: false,
     });
