@@ -79,11 +79,12 @@ export function goWhere(url: string, options: RouteOptions = {}) {
     routeDataMap.set(targetRoute, data); // 存储路由数据
     const isTabBar = tabBarSet.has(targetRoute);
 
+    if (isTabBar)
+        return uni.switchTab({ url });
+
     url = `${url}?${qs.stringify(params)}`;
 
-    if (isTabBar)
-        uni.switchTab({ url });
-    else if (redirectIfPossible)
+    if (redirectIfPossible)
         uni.redirectTo({ url });
     else
         uni.navigateTo({ url });

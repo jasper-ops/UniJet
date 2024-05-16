@@ -1,12 +1,14 @@
 import { resolve } from 'node:path';
 import process from 'node:process';
-import { type UserConfig, defineConfig } from 'vite';
+import { type UserConfig, defineConfig, loadEnv as viteLoadEnv } from 'vite';
 import dotenv from 'dotenv';
 import Components from '@uni-helper/vite-plugin-uni-components';
 import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers';
 import Uni from '@dcloudio/vite-plugin-uni';
 import UniPages from '@uni-helper/vite-plugin-uni-pages';
+import rollupAbortPolyfill from './plugins/rollup-abort-polyfill';
 
+const isH5 = process.env.UNI_PLATFORM === 'h5';
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 
@@ -64,10 +66,14 @@ function loadTheme(mode: string) {
 
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode }) => {
+    console.log('🚀 ~ defineConfig ~ mode:', mode);
+
     // 动态导入仅支持ESM的模块
     const UnoCss = await import('unocss/vite').then(i => i.default);
 
     loadEnv(mode); // 使用dotenv加载环境变量
+    const envs = viteLoadEnv(mode, envDir);
+    console.log(envs);
 
     return {
         define: {
@@ -75,6 +81,9 @@ export default defineConfig(async ({ mode }) => {
         },
         base: './',
         plugins: [
+            !isH5 && rollupAbortPolyfill({
+                fromLibrary: 'abort-controller/dist/abort-controller',
+            }),
             UniPages({
                 mergePages: false,
             }),
@@ -104,12 +113,12 @@ export default defineConfig(async ({ mode }) => {
         server: {
             host: '0.0.0.0',
             proxy: {
-                '^/api': {
-                    target:'https://imas-sg-qa.plaza-network.com',
+                '^/v1': {
+                    target: 'https://imas-sg-qa.plaza-network.com',
                     changeOrigin: true,
-                    rewrite: (path)=> path.replace(/^\/api/, ''),
-                }
-            }
+                    // rewrite: path => path.replace(/^\/v1/, ''),
+                },
+            },
         },
         // build: {
         //     target: 'es2015',

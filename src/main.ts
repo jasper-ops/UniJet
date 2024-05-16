@@ -4,7 +4,6 @@ import App from '@/App.vue';
 import 'virtual:uno.css';
 import pinia from '@/store';
 import i18n from '@/i18n';
-// import 'virtual:uno.css';
 
 export function createApp() {
     try {

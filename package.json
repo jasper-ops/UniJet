@@ -3,7 +3,6 @@
     "type": "commonjs",
     "version": "0.0.0",
     "scripts": {
-        "jet": "pnpm i && pnpm wot",
         "dev:app": "uni -p app",
         "dev:app-android": "uni -p app-android",
         "dev:app-ios": "uni -p app-ios",
@@ -61,6 +60,7 @@
         "@tanstack/vue-query": "^5.36.0",
         "@types/lodash-es": "^4.17.12",
         "@uni-helper/axios-adapter": "^1.5.2",
+        "abort-controller": "^3.0.0",
         "axios": "^1.6.8",
         "fast-querystring": "^1.1.2",
         "lodash-es": "^4.17.21",
