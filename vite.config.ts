@@ -6,7 +6,7 @@ import Components from '@uni-helper/vite-plugin-uni-components';
 import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers';
 import Uni from '@dcloudio/vite-plugin-uni';
 import UniPages from '@uni-helper/vite-plugin-uni-pages';
-import rollupAbortPolyfill from './plugins/rollup-abort-polyfill';
+import AutoImport from 'unplugin-auto-import/vite';
 
 const isH5 = process.env.UNI_PLATFORM === 'h5';
 const DEVELOPMENT = 'development';
@@ -81,8 +81,14 @@ export default defineConfig(async ({ mode }) => {
         },
         base: './',
         plugins: [
-            !isH5 && rollupAbortPolyfill({
-                fromLibrary: 'abort-controller/dist/abort-controller',
+            AutoImport({
+                exclude: [/[\\/]\.git[\\/]/],
+                imports: [{
+                    'abort-controller/dist/abort-controller': [
+                        'AbortController',
+                        'AbortSignal',
+                    ],
+                }],
             }),
             UniPages({
                 mergePages: false,
