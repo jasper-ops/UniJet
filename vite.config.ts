@@ -83,6 +83,7 @@ export default defineConfig(async ({ mode }) => {
         plugins: [
             AutoImport({
                 exclude: [/[\\/]\.git[\\/]/],
+                include: [/node_modules\/@tanstack\/query-core/],
                 imports: [{
                     'abort-controller/dist/abort-controller': [
                         'AbortController',
@@ -125,6 +126,9 @@ export default defineConfig(async ({ mode }) => {
                     // rewrite: path => path.replace(/^\/v1/, ''),
                 },
             },
+        },
+        build: {
+            sourcemap: true,
         },
         // build: {
         //     target: 'es2015',
