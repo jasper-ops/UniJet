@@ -1,8 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { createUniAppAxiosAdapter } from '@uni-helper/axios-adapter';
-import useUserStore from '@/store/userStore';
-import { getLocale } from '@/i18n';
-import pinia from '@/store';
+import i18n, { getLocale } from '@/i18n';
 
 const isH5 = __UNI_PLATFORM__ === 'h5';
 
@@ -18,48 +16,21 @@ const http = axios.create({
     },
 });
 
-const userStore = useUserStore(pinia);
-
 http.interceptors.request.use((config) => {
     config.headers['Accept-Language'] = getLocale();
-
-    if (!isH5 && userStore.memberID)
-        config.headers.Cookie = `AppMemberId=${userStore.memberID}`;
-
-    if (config.needToken && userStore.token)
-        config.headers.Authorization = `Bearer ${userStore.token}`;
 
     return config;
 });
 
 http.interceptors.response.use((response) => {
-    const headerKeys = Object.keys(response.headers);
-
-    // #region 更新token
-    const tokenKey = headerKeys.find(key => key.toLowerCase() === 'refreshtoken');
-
-    if (tokenKey) {
-        const newToken = response.headers[tokenKey];
-
-        if (newToken) {
-            userStore.setState({
-                token: newToken,
-            });
-        }
-    }
-    // #endregion 更新token
-
-    console.log(response.status);
-
     return response;
 }, (error) => {
+    // 响应状态码非20X会到进入这里执行
     if (error instanceof AxiosError) {
         const { response } = error;
 
         if (response?.status === 401) {
-            userStore.setState({
-                token: '',
-            });
+            // 可在此处做登出操作
         }
     }
 
