@@ -12,6 +12,10 @@ const baseUrl = import.meta.env.VITE_CORE_BASEURL ?? '';
 const http = axios.create({
     baseURL: isH5 ? baseUrl : `${origin}${baseUrl}`,
     adapter: createUniAppAxiosAdapter(),
+    showLoading: {
+        title: '加载中...',
+        mask: true,
+    },
 });
 
 const userStore = useUserStore(pinia);
