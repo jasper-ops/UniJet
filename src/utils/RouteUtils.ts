@@ -1,6 +1,7 @@
 import { last } from 'lodash-es';
 import qs from 'fast-querystring';
 import { onUnload } from '@dcloudio/uni-app';
+import { ref } from 'vue';
 import type { AllRoutes } from '@/pages';
 import pagesConfig, { homePath } from '@/pages';
 
@@ -102,7 +103,7 @@ export function goBack(delta = 1) {
         uni.navigateBack({ delta });
 }
 
-export function useRouteData() {
+export function useRouteData<T>() {
     const route = getCurrentRoute();
 
     if (!route)
@@ -114,5 +115,7 @@ export function useRouteData() {
         routeDataMap.delete(route);
     });
 
-    return { data };
+    return {
+        data: ref(data as T),
+    };
 }
