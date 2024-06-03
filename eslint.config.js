@@ -13,6 +13,7 @@ const config = antfu({
         'no-console': 'off',
         'no-unused-vars': 'warn',
         'no-prototype-builtins': 'warn',
+        'curly': ['error', 'all'],
 
         'unused-imports/no-unused-vars': 'warn',
 
